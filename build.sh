@@ -14,7 +14,6 @@ function yes_or_no () {
 }
 
 docker build -t rpiano-builder . || exit 1
-
 TMP_NAME="plugin-builder-$RANDOM"
 docker create --name "$TMP_NAME" rpiano-builder
 
@@ -24,9 +23,6 @@ mkdir -p ./Release
 if docker cp "$TMP_NAME":/app/rdpiano_juce/Builds/LinuxMakefile/build/. ./Release/; then
     echo "Build artifacts copied successfully."
     ls -R ./Release
-else
-    echo "Zkouším alternativní cestu..."
-    docker cp "$TMP_NAME":/app/rdpiano_juce/Builds/LinuxMakefile/build/Release/. ./Release/
 fi
 
 docker rm -f "$TMP_NAME"
