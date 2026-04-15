@@ -1,5 +1,4 @@
 FROM ubuntu:22.04
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
@@ -12,12 +11,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
 ARG CACHE_BUST=1
 RUN git clone --recursive https://github.com/giulioz/rdpiano.git .
 
 WORKDIR /app/rdpiano_juce
-
 RUN git clone -b 8.0.1 --depth 1 https://github.com/juce-framework/JUCE JUCE
 
 WORKDIR /app/rdpiano_juce/JUCE/extras/Projucer/Builds/LinuxMakefile
